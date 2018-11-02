@@ -17,6 +17,24 @@ const styles = {
 };
 // These Fields will create a login form with three fields
 
+const fields = [
+  {
+    type: 'text',
+    name: 'task',
+    required: true,
+    icon: 'ios-person',
+    label: 'Task',
+  },
+  {
+    type: 'text',
+    name: 'desc',
+    icon: 'ios-lock',
+    required: true,
+    label: 'Desc',
+  },
+  
+];
+
 export default class DetailScreen extends Component {
 
   constructor(props){
@@ -57,7 +75,11 @@ export default class DetailScreen extends Component {
     const val = navigation.getParam('data');
     const task = val.data.task
     const task_description = val.data.task_description
-
+    let formData = {
+      task,
+      desc: task_description
+      
+    }
     return (
       <View style={styles.wrapper}>
       <View>
@@ -65,26 +87,8 @@ export default class DetailScreen extends Component {
           ref={(c) => {
             this.formGenerator = c;
           }}
-          fields={[
-            {
-              type: 'text',
-              name: 'task',
-              required: true,
-              icon: 'ios-person',
-              label: 'Task',
-              defaultValue:task
-            },
-            {
-              type: 'text',
-              name: 'desc',
-              icon: 'ios-lock',
-              required: true,
-              label: 'Desc',
-              defaultValue:task_description
-            },
-            
-          ]}
-          
+          fields={fields}
+          formData={formData}
         />
       </View>
       <View style={styles.submitButton}>
